@@ -3,7 +3,7 @@ Contributed by Gabliw (hchan11@naver.com)
 """
 from workspace import ScreenFrame
 from tools import ToolsFrame
-import tkinter as Tk
+import tkinter as tk
 
 
 WIDTH_REDUCE = 200
@@ -14,6 +14,7 @@ class Reactor:
     def __init__(self):
         self.win_width = None
         self.win_height = None
+        self.file = None
 
     def window_setting(self, width, height):
         self.win_width = width
@@ -23,22 +24,23 @@ class Reactor:
         return self.win_width, self.win_height
 
 
-class Application(Tk.Frame):
+class Application(tk.Frame):
     def __init__(self, window, win_info):
-        Tk.Frame.__init__(self, window)
+        tk.Frame.__init__(self, window)
         self.win_info = win_info
         self.master.title("Grid Manager")
 
-        tools = ToolsFrame(window, self.win_info)
         screens = ScreenFrame(window, self.win_info)
+        screens.pack(side='left', expand=False, fill=tk.Y, padx=2, pady=2)
 
-        screens.pack(side='left', expand=False, fill=Tk.Y, padx=2, pady=2)
-        tools.pack(side='left', expand=True, fill=Tk.BOTH, padx=2, pady=2)
+        tools = ToolsFrame(window, screens, self.win_info)
+        tools.tool_setting()
+        tools.pack(side='left', expand=True, fill=tk.BOTH, padx=2, pady=2)
 
 
 if __name__ == "__main__":
     infoster = Reactor()
-    main_structure = Tk.Tk()
+    main_structure = tk.Tk()
     main_structure.title("Masking Mk.2")
     infoster.window_setting(main_structure.winfo_screenwidth()-WIDTH_REDUCE,
                             main_structure.winfo_screenheight()-HEIGHT_REDUCE)
