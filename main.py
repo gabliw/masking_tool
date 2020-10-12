@@ -6,6 +6,10 @@ from tools import ToolsFrame
 import tkinter as Tk
 
 
+WIDTH_REDUCE = 200
+HEIGHT_REDUCE = 200
+
+
 class Reactor:
     def __init__(self):
         self.win_width = None
@@ -33,14 +37,15 @@ class Application(Tk.Frame):
 
 
 if __name__ == "__main__":
-    win_info = Reactor()
-    window = Tk.Tk()
-    window.title("Masking Mk.2")
-    win_info.window_setting(window.winfo_screenwidth()-100, window.winfo_screenheight()-100)
+    infoster = Reactor()
+    main_structure = Tk.Tk()
+    main_structure.title("Masking Mk.2")
+    infoster.window_setting(main_structure.winfo_screenwidth()-WIDTH_REDUCE,
+                            main_structure.winfo_screenheight()-HEIGHT_REDUCE)
 
-    window.geometry(f"{win_info.win_width}x{win_info.win_height}")
-    window.resizable(False, False)
-    application = Application(window, win_info)
+    main_structure.geometry(f"{infoster.win_width}x{infoster.win_height}")
+    main_structure.resizable(False, False)
+    application = Application(main_structure, infoster)
 
-    window.mainloop()
+    main_structure.mainloop()
 

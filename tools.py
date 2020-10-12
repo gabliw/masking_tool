@@ -22,6 +22,6 @@ class ToolsFrame(Tk.Frame):
         page_descipt.grid(row=2, column=0, padx=10, pady=10)
         page_entry.grid(row=2, column=1, pady=10)
 
-        load_btn = Tk.Button()
+        # load_btn = Tk.Button()
 
         Tk.Button()
