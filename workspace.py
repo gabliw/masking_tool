@@ -1,3 +1,4 @@
+import time
 from PIL import ImageTk, Image
 import tkinter as tk
 
@@ -8,12 +9,16 @@ class ScreenFrame(tk.Frame):
         self.width = 3*win_info.win_width/4
         self.height = win_info.win_height
         self.win_info = win_info
+        self.canv = None
 
     def screen_update(self):
-        img = ImageTk.PhotoImage(Image.open(self.win_info.file))
-        panel = tk.Label(self, image=img)
-
-        panel.pack(side='left', expand=False)
+        if self.win_info.file is None:
+            self.pack(side='left', expand=False, fill=tk.Y, padx=2, pady=2)
+        else:
+            img = ImageTk.PhotoImage(Image.open(self.win_info.file))
+            self.canv = tk.Canvas()
+            self.canv.create_image((150, 150), image=img)
+            self.canv.pack()
 
     def get_image_info(self, data):
         self.win_info.file = data

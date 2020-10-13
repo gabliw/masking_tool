@@ -30,12 +30,13 @@ class Application(tk.Frame):
         self.win_info = win_info
         self.master.title("Grid Manager")
 
-        screens = ScreenFrame(window, self.win_info)
-        screens.pack(side='left', expand=False, fill=tk.Y, padx=2, pady=2)
+        self.screens = ScreenFrame(window, self.win_info)
+        self.tools = ToolsFrame(window, self.screens, self.win_info)
 
-        tools = ToolsFrame(window, screens, self.win_info)
-        tools.tool_setting()
-        tools.pack(side='left', expand=True, fill=tk.BOTH, padx=2, pady=2)
+    def screen_update(self):
+        self.tools.tool_setting()
+        self.screens.screen_update()
+        self.tools.pack(side='left', expand=True, fill=tk.BOTH, padx=2, pady=2)
 
 
 if __name__ == "__main__":
@@ -49,5 +50,6 @@ if __name__ == "__main__":
     main_structure.resizable(False, False)
     application = Application(main_structure, infoster)
 
+    application.screen_update()
     main_structure.mainloop()
 
